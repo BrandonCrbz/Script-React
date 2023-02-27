@@ -1,8 +1,12 @@
-echo 'Donner un nom au dossier'
-read nomDossier
+#echo 'Donner un nom au dossier'
+#read nomDossier
 
-mkdir MolenGeek/$nomDossier
-cd MolenGeek/$nomDossier
+#if ! $nomDossier
+#then 
+#  cd MolenGeek/$nomDossier
+#else 
+#  mkdir MolenGeek/$nomDossier
+#fi
 
 echo 'Donner un nom au projet'
 read nomProjet
@@ -13,7 +17,7 @@ npx create-react-app $nomProjet
 cd $nomProjet
 
 echo 'Installation de Sass'
-npm install -g sass
+npm install sass
 
 echo 'Installation de React-Rooter'
 npm install react-router-dom
@@ -111,4 +115,4 @@ cat <<EOT > src/index.css
 EOT
 
 code .
-npm start
+#npm start
