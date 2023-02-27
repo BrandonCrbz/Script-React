@@ -1,15 +1,16 @@
-echo 'Donner un nom à votre projet'
-read nom
+echo 'Donner un nom au dossier'
+read nomDossier
 
-#mkdir MolenGeek/$nom
-#cd MolenGeek/$nom
+mkdir MolenGeek/$nomDossier
+cd MolenGeek/$nomDossier
 
-cd MolenGeek
+echo 'Donner un nom au projet'
+read nomProjet
 
 echo 'Installation de React'
-npx create-react-app $nom
+npx create-react-app $nomProjet
 
-cd $nom
+cd $nomProjet
 
 echo 'Installation de Sass'
 npm install -g sass
