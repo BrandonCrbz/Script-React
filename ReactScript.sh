@@ -35,8 +35,10 @@ rm src/logo.svg
 rm src/reportWebVitals.js
 rm src/setupTests.js
 
-echo -e '\033[33mCréation du dossier Components\033[37m'
-mkdir src/components
+echo -e '\033[33mCréation de dossiers/fichiers nécessaire\033[37m'
+mkdir -p src/components/Navbar
+touch src/components/Navbar/Navbar.js
+touch src/components/Error.js
 touch src/App.scss
 
 echo -e '\033[33mRemplacement dans les fichiers\033[37m'
@@ -78,18 +80,24 @@ import {
 } from 'react-router-dom'
 
 //Import Components
-
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Navbar/>}>
-    </Route>
-  )
-)
+import { Navbar } from './components/Navbar/Navbar'
+import { Error } from './components/Error'
 
 function App() {
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Navbar/>}>
+
+        <Route path="*" element={<Error/>}/>
+      </Route>
+    )
+  )
+
   return (
-    <RouterProvider router={router}/>
+    <div>
+      <RouterProvider router={router}/>
+    </div>
   );
 }
 
@@ -115,6 +123,40 @@ cat <<EOT > src/index.css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+EOT
+
+cat <<EOT > src/components/Navbar/Navbar.js
+import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
+
+const Navbar = () => {
+  return (
+    <div>
+      <header>
+        <nav>
+          <Link to='/'>Acceuil</Link>
+        </nav>
+      </header>
+      <main>
+        <Outlet/>
+      </main>
+    </div>
+  )
+}
+
+export default Navbar
+EOT
+
+cat <<EOT > src/components/Error.js
+import React from 'react'
+
+const Error = () => {
+  return (
+    <div>Error 404</div>
+  )
+}
+
+export default Error
 EOT
 
 code .
