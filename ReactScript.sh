@@ -1,32 +1,30 @@
-#echo 'Donner un nom au dossier'
-#read nomDossier
+cd MolenGeek
 
-#if ! $nomDossier
-#then 
-#  cd MolenGeek/$nomDossier
-#else 
-#  mkdir MolenGeek/$nomDossier
-#fi
+echo -e '\033[34mDonner un nom au dossier\033[37m'
+read nomDossier
 
-echo 'Donner un nom au projet'
+mkdir $nomDossier
+cd $nomDossier
+
+echo -e '\033[34mDonner un nom au projet\033[37m'
 read nomProjet
 
-echo 'Installation de React'
+echo -e '\033[32mInstallation de React\033[37m'
 npx create-react-app $nomProjet
 
 cd $nomProjet
 
-echo 'Installation de Sass'
+echo -e '\033[32mInstallation de Sass\033[37m'
 npm install sass
 
-echo 'Installation de React-Rooter'
+echo -e '\033[32mInstallation de React-Rooter\033[37m'
 npm install react-router-dom
 
-echo 'Installation de TailWind'
+echo -e '\033[32mInstallation de TailWind\033[37m'
 npm install -D tailwindcss
 npx tailwindcss init
 
-echo 'Suppression des fichier inutile'
+echo -e '\033[33mSuppression des fichier inutile\033[37m'
 rm public/favicon.ico
 rm public/logo192.png
 rm public/logo512.png
@@ -37,11 +35,11 @@ rm src/logo.svg
 rm src/reportWebVitals.js
 rm src/setupTests.js
 
-echo 'Création du dossier Components'
+echo -e '\033[33mCréation du dossier Components\033[37m'
 mkdir src/components
 touch src/App.scss
 
-echo 'Remplacement dans les fichiers'
+echo -e '\033[33mRemplacement dans les fichiers\033[37m'
 cat <<EOT > public/index.html
 <!DOCTYPE html>
 <html lang="en">
@@ -60,14 +58,11 @@ EOT
 cat <<EOT > src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+  <App />
 );
 EOT
 
@@ -75,18 +70,26 @@ cat <<EOT > src/app.js
 import './App.css';
 import './App.scss';
 import { useState, useEffect } from 'react'
-import { Routes, Route} from 'react-router-dom';
+import {
+  createBrowserRouter, 
+  createRoutesFromElements,
+  Route,
+  RouterProvider
+} from 'react-router-dom'
 
 //Import Components
-//import { Home } from ./components/Home/Home
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Navbar/>}>
+    </Route>
+  )
+)
 
 function App() {
   return (
-    <div>
-      <Routes>
-        {/*<Route path='/' element={<Home/>}/>*/}
-      </Routes>
-    </div>
+    <RouterProvider router={router}/>
   );
 }
 
