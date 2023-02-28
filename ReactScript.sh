@@ -37,7 +37,9 @@ rm src/setupTests.js
 
 echo -e '\033[33mCréation de dossiers/fichiers nécessaire\033[37m'
 mkdir -p src/components/Navbar
-touch src/components/Navbar/Navbar.js
+mkdir -p src/components/Home
+touch src/components/Navbar/Navbar.js 
+touch src/components/Home/Home.js
 touch src/components/Error.js
 touch src/App.scss
 
@@ -81,6 +83,7 @@ import {
 
 //Import Components
 import { Navbar } from './components/Navbar/Navbar'
+import { Home } from './components/Home/Home'
 import { Error } from './components/Error'
 
 function App() {
@@ -88,7 +91,8 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Navbar/>}>
-
+        <Route index element={<Home/>}/>
+        
         <Route path="*" element={<Error/>}/>
       </Route>
     )
@@ -134,7 +138,7 @@ const Navbar = () => {
     <div>
       <header>
         <nav>
-          <Link to='/'>Acceuil</Link>
+          <Link to='/'>Home</Link>
         </nav>
       </header>
       <main>
@@ -145,6 +149,18 @@ const Navbar = () => {
 }
 
 export default Navbar
+EOT
+
+cat <<EOT > src/components/Home/Home.js
+import React from 'react'
+
+const Home = () => {
+  return (
+    <div>Home</div>
+  )
+}
+
+export default Home
 EOT
 
 cat <<EOT > src/components/Error.js
