@@ -14,15 +14,24 @@ npx create-react-app $nomProjet
 
 cd $nomProjet
 
-echo -e '\033[32mInstallation de Sass\033[37m'
-npm install sass
-
 echo -e '\033[32mInstallation de React-Rooter\033[37m'
 npm install react-router-dom
+
+echo -e '\033[32mInstallation de React-Redux\033[37m'
+npm install react-redux
+
+echo -e '\033[32mInstallation de Redux/Toolkit\033[37m'
+npm install @reduxjs/toolkit
+
+echo -e '\033[32mInstallation de Sass\033[37m'
+npm install sass
 
 echo -e '\033[32mInstallation de TailWind\033[37m'
 npm install -D tailwindcss
 npx tailwindcss init
+
+echo -e '\033[32mInstallation de Axios\033[37m'
+npm install axios
 
 echo -e '\033[33mSuppression des fichier inutile\033[37m'
 rm public/favicon.ico
@@ -73,18 +82,18 @@ EOT
 cat <<EOT > src/app.js
 import './App.css';
 import './App.scss';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import {
   createBrowserRouter, 
   createRoutesFromElements,
   Route,
   RouterProvider
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 //Import Components
-import { Navbar } from './components/Navbar/Navbar'
-import { Home } from './components/Home/Home'
-import { Error } from './components/Error'
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Error from './components/Error';
 
 function App() {
 
@@ -92,7 +101,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Navbar/>}>
         <Route index element={<Home/>}/>
-        
+
         <Route path="*" element={<Error/>}/>
       </Route>
     )
@@ -176,4 +185,4 @@ export default Error
 EOT
 
 code .
-#npm start
+npm start
